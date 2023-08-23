@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author index{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: red; /* Thay đổi màu nền thành màu đỏ */
+        color: white; /* Thay đổi màu chữ thành trắng để tương phản với nền đỏ */
+    }
+
+    /* Thêm các quy tắc CSS khác nếu cần */
+    .table {
+        /* Quy tắc cho bảng */
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <h1>Author index</h1>
+
+    <table class="table">
+        <thead>
+            <tr style="margin-top: 50px;">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.id }}</td>
+                <td>{{ author.name }}</td>
+                <td>{{ author.birthday ? author.birthday|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_author_show', {'id': author.id}) }}"style="text-decoration:none;">Show</a>
+                    <a href="{{ path('app_author_edit', {'id': author.id}) }}"style="text-decoration:none;">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_author_new') }}"style="text-decoration:none;"><center>Create new<</a>
+{% endblock %}

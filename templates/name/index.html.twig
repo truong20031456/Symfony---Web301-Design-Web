@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Name index{% endblock %}
+
+{% block body %}
+    <h1>Name index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fullname</th>
+                <th>Birthday</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for name in names %}
+            <tr>
+                <td>{{ name.id }}</td>
+                <td>{{ name.fullname }}</td>
+                <td>{{ name.birthday ? name.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ name.email }}</td>
+                <td>
+                    <a href="{{ path('app_name_show', {'id': name.id}) }}"style="text-decoration:none;">show</a>
+                    <a href="{{ path('app_name_edit', {'id': name.id}) }}"style="text-decoration:none;">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_name_new') }}"style="text-decoration:none;"><center>Create new</center></a>
+{% endblock %}
